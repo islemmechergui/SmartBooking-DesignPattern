@@ -1,31 +1,31 @@
-package desgin.pattern.smartbooking.services.ServiceImpl;
-
+package desgin.pattern.smartbooking.services.serviceImpl;
 
 import desgin.pattern.smartbooking.services.PaymentService;
+import desgin.pattern.smartbooking.strategy.PaymentMethod;
 import desgin.pattern.smartbooking.strategy.PaymentStrategy;
+import desgin.pattern.smartbooking.strategy.PaymentStrategyFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
-    private final Map<String, PaymentStrategy> strategies;
+    private final PaymentStrategyFactory factory;
 
-    public PaymentServiceImpl(Map<String, PaymentStrategy> strategies) {
-        this.strategies = strategies;
+    public PaymentServiceImpl(PaymentStrategyFactory factory) {
+        this.factory = factory;
     }
 
+
+
+
     @Override
-    public void pay(Long bookingId, String method, BigDecimal amount) {
+    public void pay(Long bookingId, PaymentMethod method, BigDecimal amount) {
 
-        PaymentStrategy strategy = strategies.get(method);
-
-        if (strategy == null) {
-            throw new IllegalArgumentException("Méthode de paiement non supportée");
-        }
+        PaymentStrategy strategy = factory.getStrategy(method);
 
         strategy.pay(amount);
+
     }
 }

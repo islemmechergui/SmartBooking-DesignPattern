@@ -6,8 +6,11 @@ import desgin.pattern.smartbooking.repositories.UserRepository;
 import desgin.pattern.smartbooking.services.BookingService;
 import desgin.pattern.smartbooking.entites.BookingEntity;
 import desgin.pattern.smartbooking.entites.BookingStatus;
+import desgin.pattern.smartbooking.services.PaymentService;
+import desgin.pattern.smartbooking.strategy.PaymentMethod;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,13 +20,16 @@ public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepo;
     private final UserRepository userRepo;
     private final ServiceRepository serviceRepo;
+    private final PaymentService paymentService;
+
 
     public BookingServiceImpl(BookingRepository bookingRepo,
                               UserRepository userRepo,
-                              ServiceRepository serviceRepo) {
+                              ServiceRepository serviceRepo, PaymentService paymentService) {
         this.bookingRepo = bookingRepo;
         this.userRepo = userRepo;
         this.serviceRepo = serviceRepo;
+        this.paymentService = paymentService;
     }
 
     @Override
@@ -48,5 +54,15 @@ public class BookingServiceImpl implements BookingService {
         booking.setStatus(BookingStatus.CANCELLED);
         booking.setUpdatedAt(LocalDateTime.now());
         return bookingRepo.save(booking);
+    }
+
+    @Override
+    public void confirmBooking(Long bookingId, PaymentMethod paymentMethod) {
+
+        BigDecimal amount = new BigDecimal("150.00");
+
+        paymentService.pay(bookingId, paymentMethod, amount);
+
+
     }
 }

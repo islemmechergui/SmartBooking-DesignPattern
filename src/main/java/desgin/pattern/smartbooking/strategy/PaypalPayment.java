@@ -1,12 +1,11 @@
 package desgin.pattern.smartbooking.strategy;
 
-import desgin.pattern.smartbooking.strategy.PaymentStrategy;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
-@Component("WALLET")
-public class WalletPayment implements PaymentStrategy {
+@Component("PAYPAL")
+public class PaypalPayment implements PaymentStrategy {
 
 
 

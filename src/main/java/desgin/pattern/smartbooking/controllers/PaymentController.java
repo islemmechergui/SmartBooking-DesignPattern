@@ -1,6 +1,7 @@
 package desgin.pattern.smartbooking.controllers;
 
 import desgin.pattern.smartbooking.services.PaymentService;
+import desgin.pattern.smartbooking.strategy.PaymentMethod;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -19,6 +20,6 @@ public class PaymentController {
     public void pay(@RequestParam Long bookingId,
                     @RequestParam String method,
                     @RequestParam BigDecimal amount) {
-        paymentService.pay(bookingId, method, amount);
+        paymentService.pay(bookingId, PaymentMethod.valueOf(method), amount);
     }
 }
