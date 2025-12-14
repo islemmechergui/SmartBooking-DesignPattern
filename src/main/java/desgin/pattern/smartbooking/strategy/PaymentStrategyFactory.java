@@ -1,7 +1,6 @@
 package desgin.pattern.smartbooking.strategy;
 
 import org.springframework.stereotype.Component;
-
 import java.util.Map;
 
 @Component
