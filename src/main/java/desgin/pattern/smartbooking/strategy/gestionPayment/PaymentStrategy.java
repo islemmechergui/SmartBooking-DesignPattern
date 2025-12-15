@@ -1,4 +1,4 @@
-package desgin.pattern.smartbooking.strategy;
+package desgin.pattern.smartbooking.strategy.gestionPayment;
 
 import java.math.BigDecimal;
 

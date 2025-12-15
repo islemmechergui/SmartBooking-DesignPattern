@@ -1,5 +1,6 @@
-package desgin.pattern.smartbooking.strategy;
+package desgin.pattern.smartbooking.strategy.gestionPayment;
 
+import desgin.pattern.smartbooking.enums.PaymentMethod;
 import org.springframework.stereotype.Component;
 import java.util.Map;
 

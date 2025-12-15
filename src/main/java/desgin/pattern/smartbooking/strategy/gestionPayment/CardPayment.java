@@ -1,9 +1,10 @@
-package desgin.pattern.smartbooking.strategy;
+package desgin.pattern.smartbooking.strategy.gestionPayment;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 
-@Component("CARD")
+@Service("CARD")
 public class CardPayment implements PaymentStrategy {
 
     @Override

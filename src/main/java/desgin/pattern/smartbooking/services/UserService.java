@@ -9,4 +9,6 @@ public interface UserService {
     UserEntity getUserById(Long id);
     List<UserEntity> getAllUsers();
     void deleteUser(Long id);
+    void performRoleAction(Long userId);
+
 }

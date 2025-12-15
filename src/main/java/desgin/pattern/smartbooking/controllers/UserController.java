@@ -2,6 +2,7 @@ package desgin.pattern.smartbooking.controllers;
 
 import desgin.pattern.smartbooking.entites.UserEntity;
 import desgin.pattern.smartbooking.services.UserService;
+import desgin.pattern.smartbooking.strategy.gestionUtilisateur.UserActionFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +35,10 @@ public class UserController {
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
+    }
+
+    @PostMapping("/{id}/action")
+    public void performUserRoleAction(@PathVariable Long id) {
+        userService.performRoleAction(id);
     }
 }

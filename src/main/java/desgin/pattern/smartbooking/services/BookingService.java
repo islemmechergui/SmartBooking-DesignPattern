@@ -1,7 +1,9 @@
 package desgin.pattern.smartbooking.services;
 
 import desgin.pattern.smartbooking.entites.BookingEntity;
-import desgin.pattern.smartbooking.strategy.PaymentMethod;
+import desgin.pattern.smartbooking.entites.UserEntity;
+import desgin.pattern.smartbooking.enums.BookingStatus;
+import desgin.pattern.smartbooking.enums.PaymentMethod;
 
 import java.time.LocalDateTime;
 
@@ -13,5 +15,9 @@ public interface BookingService {
     BookingEntity cancel(Long id);
 
     void confirmBooking(Long bookingId, PaymentMethod paymentMethod);
+
+    List<BookingEntity> searchBookings(String clientName, BookingStatus status, LocalDateTime start, LocalDateTime end);
+
+    List<BookingEntity> getBookingHistory(UserEntity client);
 
 }

@@ -1,18 +1,20 @@
 package desgin.pattern.smartbooking.services.ServiceImpl;
 
+import desgin.pattern.smartbooking.entites.UserEntity;
 import desgin.pattern.smartbooking.repositories.BookingRepository;
 import desgin.pattern.smartbooking.repositories.ServiceRepository;
 import desgin.pattern.smartbooking.repositories.UserRepository;
 import desgin.pattern.smartbooking.services.BookingService;
 import desgin.pattern.smartbooking.entites.BookingEntity;
-import desgin.pattern.smartbooking.entites.BookingStatus;
+import desgin.pattern.smartbooking.enums.BookingStatus;
 import desgin.pattern.smartbooking.services.PaymentService;
-import desgin.pattern.smartbooking.strategy.PaymentMethod;
+import desgin.pattern.smartbooking.enums.PaymentMethod;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -64,5 +66,34 @@ public class BookingServiceImpl implements BookingService {
         paymentService.pay(bookingId, paymentMethod, amount);
 
 
+    }
+    @Override
+    public List<BookingEntity> searchBookings(String clientName, BookingStatus status, LocalDateTime start, LocalDateTime end) {
+        List<BookingEntity> bookings = bookingRepo.findAll();
+
+        if (clientName != null && !clientName.isEmpty()) {
+            bookings = bookings.stream()
+                    .filter(b -> b.getClient().getName().toLowerCase().contains(clientName.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
+
+        if (status != null) {
+            bookings = bookings.stream()
+                    .filter(b -> b.getStatus() == status)
+                    .collect(Collectors.toList());
+        }
+
+        if (start != null && end != null) {
+            bookings = bookings.stream()
+                    .filter(b -> !b.getBookingTime().isBefore(start) && !b.getBookingTime().isAfter(end))
+                    .collect(Collectors.toList());
+        }
+
+        return bookings;
+    }
+
+    @Override
+    public List<BookingEntity> getBookingHistory(UserEntity client) {
+        return bookingRepo.findByClientOrderByBookingTimeDesc(client);
     }
 }

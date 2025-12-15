@@ -1,5 +1,6 @@
 package desgin.pattern.smartbooking.entites;
 
+import desgin.pattern.smartbooking.enums.ServiceType;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.apache.catalina.User;
@@ -21,6 +22,9 @@ public class ServiceEntity {
 
     @ManyToOne
     private CategoryEntity category;
+
+    @Enumerated(EnumType.STRING)
+    private ServiceType type;
 
     private String title;
     private String description;

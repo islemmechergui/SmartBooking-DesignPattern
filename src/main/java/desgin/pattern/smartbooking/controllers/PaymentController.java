@@ -1,7 +1,7 @@
 package desgin.pattern.smartbooking.controllers;
 
 import desgin.pattern.smartbooking.services.PaymentService;
-import desgin.pattern.smartbooking.strategy.PaymentMethod;
+import desgin.pattern.smartbooking.enums.PaymentMethod;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;

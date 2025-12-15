@@ -1,4 +1,4 @@
-package desgin.pattern.smartbooking.entites;
+package desgin.pattern.smartbooking.enums;
 
 public enum TypeNotification {
     EMAIL ,

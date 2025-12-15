@@ -3,6 +3,7 @@ package desgin.pattern.smartbooking.services.ServiceImpl;
 import desgin.pattern.smartbooking.repositories.UserRepository;
 import desgin.pattern.smartbooking.services.UserService;
 import desgin.pattern.smartbooking.entites.UserEntity;
+import desgin.pattern.smartbooking.strategy.gestionUtilisateur.UserActionFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -37,5 +38,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public void performRoleAction(Long userId) {
+        UserEntity user = getUserById(userId);
+        UserActionFactory.getStrategy(user.getRole()).performAction(user);
     }
 }

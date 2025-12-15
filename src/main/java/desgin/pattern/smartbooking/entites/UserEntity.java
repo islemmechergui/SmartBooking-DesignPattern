@@ -1,5 +1,6 @@
 package desgin.pattern.smartbooking.entites;
 
+import desgin.pattern.smartbooking.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 

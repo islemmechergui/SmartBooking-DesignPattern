@@ -1,6 +1,6 @@
 package desgin.pattern.smartbooking.services;
 
-import desgin.pattern.smartbooking.strategy.PaymentMethod;
+import desgin.pattern.smartbooking.enums.PaymentMethod;
 
 import java.math.BigDecimal;
 
